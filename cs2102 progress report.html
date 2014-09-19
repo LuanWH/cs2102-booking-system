@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title><center> CS2102 Progress Report<br>Online Booking System</center></title>
+
+</head>
+<body>
+<p><br><br><br><br></p>
+
+<h1><center> CS2102 Progress Report<br>Online Booking System</center></h1>
+
+<p><br></p>
+
+<h3><center>Movie Tickets Booking System</center></h3>
+
+<p><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<center> Luan Wenhao (A0119541J)
+<br><br>
+Lu Yuehan (A0119387U)
+<br><br>
+Hu Wenyan (A0119397R)
+</center>
+
+
+<p><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<center> 20 September 2014</center>
+
+
+<h2>Overview</h2>
+
+<hr />
+
+<p>In this project, we aim to design a online movie tickets booking application to facilitate convienient searching and booking for users.
+User will be allowed to search catalogue of movie based on the <strong>movie title</strong>,<strong>movies attributes</strong>(such as actors, director and movie descriptions),<strong>time slots</strong>,<strong>cinema name</strong>,<strong>cinema location</strong>, and <strong>ticket price range</strong>. In addition,after logging in, users are able to book movie tickets, and modify or cancel their booking afterwards.
+<br><br><br></p>
+
+<h2>Implementation</h2>
+
+<p><br></p>
+
+<h3>ER Diragram</h3>
+
+<hr />
+
+<ul>
+<li><p><strong>Description</strong> <br/>
+  In this ER diagram, there are five entities including <strong>User</strong>, <strong>Time Slots</strong>, <strong>Movie</strong>, <strong>Cinema</strong> and <strong>Hall</strong>.</p>
+
+<ul>
+<li><p><strong>User</strong></p>
+
+<p>  Users are distinguished by their user ids which are allocated by system during account registration. User types includes <strong>normal</strong>,<strong>senior</strong> and <strong>student</strong>. Certain types of users are able to enjoy discount price for movie tickets.</p></li>
+<li><p><strong>Time Slots</strong></p>
+
+<p>  For each movie, there are several time slots which contain movie title, cinema, hall in cinema,number of available tickets and standard ticket price.</p></li>
+<li><p><strong>Movies</strong></p>
+
+<p>  Movies have seven attributes including year, title, actors, director and descriptions; movies are distinguished by its title and year.</p></li>
+<li><p><strong>Cinema</strong></p>
+
+<p>  Cinemas are distinguished by its name and location.</p></li>
+<li><p><strong>Hall</strong></p>
+
+<p>  Hall is a weak entity and depends on cinema.</p></li>
+<li><p><strong>Ticket</strong></p>
+
+<p>  Users can book tickets within a time slot.The final price of a ticket will take user's type into consideration. It is a many to many relationship, that is to say, one user can book more than one tickets within same time slot, and for each timeslot, there might be zero to many tickets being sold.</p></li>
+<li><p><strong>Occupy</strong></p>
+
+<p>  For every timeslot, it must be occupied by a movie, but for movie, it may have no slot or many time slots.</p></li>
+</ul>
+</li>
+<li><p><strong>Diagram</strong></p></li>
+</ul>
+
+
+<p><img src="ER Diagram.png"  style="width: 800px;"/></p>
+
+<h3>Relational Schema</h3>
+
+<hr />
+
+<ul>
+<li><p>SQL DDL Code</p>
+
+<ul>
+<li><p>Cinema</p>
+
+<pre><code>  CREATE TABLE cinema (
+  name VARCHAR(128),
+  location VARCHAR(128),
+  PRIMARY KEY(name, location)
+  );
+</code></pre></li>
+<li><p>Hall</p>
+
+<pre><code>  CREATE TABLE hall (
+  hallid INTEGER PRIMARY KEY,
+  totalseats INTEGER DEFAULT 100,
+  nameofcinema VARCHAR(128) NOT NULL ,
+  locationofcinema VARCHAR(128) NOT NULL,
+  CONSTRAINT fk_cinema
+  FOREIGN KEY(nameofcinema, locationofcinema) REFERENCES 
+  cinema(name, location) ON DELETE CASCADE
+  );
+</code></pre></li>
+<li><p>Timeslot</p>
+
+<pre><code>  CREATE TABLE timeslot(
+  starttime DATE,
+  endtime DATE,
+  hallid INTEGER,
+  PRIMARY KEY(hallid,starttime,endtime),
+  CONSTRAINT fk_hall
+  FOREIGN KEY(hallid) REFERENCES hall(hallid) ON DELETE CASCADE
+  );
+</code></pre></li>
+<li><p>Occupy</p>
+
+<pre><code>  CREATE TABLE occupy(
+  price NUMERIC,
+  movietype VARCHAR(64),
+  movietitle VARCHAR(128),
+  movieyear INTEGER,
+  starttime DATE,
+  endtime  DATE,
+  hallid INTEGER,
+  PRIMARY KEY(movietitle, movieyear, starttime, endtime, hallid),
+  CONSTRAINT fk_movie
+  FOREIGN KEY(movietitle, movieyear) REFERENCES movie(title,year),
+  CONSTRAINT fk_timeslot
+  FOREIGN KEY(hallid,starttime,endtime) 
+  REFERENCES timeslot(hallid,starttime, endtime) 
+  ON DELETE CASCADE
+  );
+</code></pre></li>
+<li><p>Movie</p>
+
+<pre><code>  CREATE TABLE movie(
+  title VARCHAR(128),
+  year INTEGER,
+  actors VARCHAR(256),
+  director VARCHAR(64),
+  description VARCHAR(512),
+  producer VARCHAR(128),
+  PRIMARY KEY (title, year)
+  );
+</code></pre></li>
+<li><p>User</p>
+
+<pre><code>  CREATE TABLE subscriber(
+  subscriberid CHAR(16) PRIMARY KEY,  
+  username VARCHAR(32),
+  usertype VARCHAR(32), 
+  CONSTRAINT fk_subscriber
+  CHECK (usertype = 'STUDENT' OR usertype ='NORMAL' 
+  OR usertype = 'VIP' OR usertype= 'SENIOR')  
+  );
+</code></pre></li>
+<li><p>Ticket</p>
+
+<pre><code>  CREATE TABLE ticket(
+  subscriberid CHAR(16) REFERENCES subscriber(subscriberid),
+  starttime DATE,
+  endtime  DATE,
+  hallid INTEGER,
+  PRIMARY KEY(subscriberid, starttime, endtime, hallid),
+  CONSTRAINT fk_timeslots
+  FOREIGN KEY(starttime, endtime, hallid) REFERENCE
+  timeslot(starttime,endtime, hallid)
+  );  
+</code></pre></li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>
