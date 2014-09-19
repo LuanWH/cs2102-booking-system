@@ -1,12 +1,9 @@
 <br><br><br><br>
 #<center> CS2102 Progress Report<br>Online Booking System</center>
-<br>
-##<center>Movie Tickets Booking System</center> 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+###<center>Movie Tickets Booking System</center> 
+<br><br><br><br><br><br><br><br><br><br>
 ###<center>Hu Wenyan (A0119397R)
-<br>
 ###<center>Lu Yuehan (A0119387U)
-<br>
 ###<center>Luan Wenhao (A0119541J)
 </center>
 <br><br><br><br><br><br><br><br><br><br><br>
@@ -14,12 +11,10 @@
 <center> 20 September 2014</center>
 
 ## Overview
----
 In this project, we aim to design a online movie tickets booking application to facilitate convienient searching and booking for users.
 User will be allowed to search catalogue of movie based on the **movie title**,**movies attributes**(such as actors, director and movie descriptions),**time slots**,**cinema name**,**cinema location**, and **ticket price range**. In addition,after logging in, users are able to book movie tickets, and modify or cancel their booking afterwards. 
 <br><br><br>
 ##Implementation
-<br>
 ###ER Diragram
 ---
  
@@ -55,9 +50,9 @@ User will be allowed to search catalogue of movie based on the **movie title**,*
 		For every timeslot, it must be occupied by a movie, but for movie, it may have no slot or many time slots.
 
 * **Diagram**
-
+<br><br><br>
 <img src="ER Diagram.png"  style="width: 800px;"/>
-
+<br><br>
 ###Relational Schema
 ---
 * SQL DDL Code
