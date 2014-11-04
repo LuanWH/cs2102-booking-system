@@ -1,0 +1,40 @@
+<!DOCTYPE html>      
+<html>   
+
+  <head>
+
+    <title>My Ticket</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- PHP Script -->   
+  </head>
+  <body>
+    <div id="searchTicket">
+      <font style = "font-size:20px">My Ticket</font>
+
+      User Name: <input type = "text" id = "UserName" ><br>
+      User ID: <input type = "text" id = "UserID" ><br>
+
+      <button id = "search">Search my Ticket</button>
+
+      <script>
+      $("#search").click(
+        function(){
+         $.ajax({
+          url: 'searchTicket.php',
+          type: 'post',
+          data: {UserName,UserID},
+            success: function(data) {
+            $("#searchTicket").append(data);
+            },
+            error: function(data) {
+              alert(data);
+          }
+        });
+       }
+      );
+      </script>
+    </div>
+  </body>  
+</html>            
