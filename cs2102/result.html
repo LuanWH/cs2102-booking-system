@@ -1,0 +1,39 @@
+<!DOCTYPE html>      
+<html>      
+  <head>
+    <title>Your Query Result</title>
+    <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="table-responsive">
+      <font style = "font-size:20px">Current station: {{stop_name}}</font>
+      <table class="table table-striped">
+
+        <thead>
+          <tr>
+            <th>Bus Name</th>
+            <th>Arrival Time</th>
+            <th>Source</th>
+            
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for bus,times in dic.items() %}
+          <!-- <li class="{{ loop.cycle('odd', 'even') }}">{{ bus }}</li> -->
+          <tr>
+            <td>{{bus}}</td>
+            <td>{{times[1]}}</td>
+            <td>{{times[0]}}</td>
+
+
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </body>          
+</html>            
