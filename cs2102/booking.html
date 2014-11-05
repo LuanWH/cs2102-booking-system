@@ -37,7 +37,7 @@
       </form>
     </div>
     <script type="text/javascript">
-
+      var timeSlotMap = [];
       function fetchTimeSlots(cinemaName, movieTitle){
         if(cinemaName != null && cinemaName != "" &&
            movieTitle != null && movieTitle != ""){
@@ -46,11 +46,18 @@
             type: 'post',
             data: {'cinemaName': cinemaName,
                    'movieTitle': movieTitle},
+            dataType: 'json',
             success: function (response) {
+              timeSlotMap = response;
               alert(response);
               $('#Timeslot').empty();
               $('#Timeslot').html('<option value=\""\"">Select Timeslot</option>');
-              $('#Timeslot').append(response);
+              for(var i = 0; i < timeSlotMap.length; i++){
+                $('#Timeslot').append('<option value='+i+'>'+
+                                    timeSlotMap[i].startTime+' to '+
+                                    timeSlotMap[i].endTime + ' at hall '+
+                                    timeSlotMap[i].hallID+'</option>');
+              }
             },
             error: function () {
               $('#Timeslot').empty();
@@ -86,7 +93,6 @@
       }
 
       function fetchCinemas() {
-
 
           $.ajax({
             url:'fetchCinemas.php',
