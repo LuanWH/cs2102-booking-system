@@ -42,7 +42,7 @@
         if(cinemaName != null && cinemaName != "" &&
            movieTitle != null && movieTitle != ""){
           $.ajax({
-            url:'fetchTimeSlots.php',
+            url:'fetchTimeslots.php',
             type: 'post',
             data: {'cinemaName': cinemaName,
                    'movieTitle': movieTitle},
@@ -51,6 +51,7 @@
               timeSlotMap = response;
               alert(response);
               $('#Timeslot').empty();
+              $('#TimeslotMsgContainer').empty();
               $('#Timeslot').html('<option value=\""\"">Select Timeslot</option>');
               for(var i = 0; i < timeSlotMap.length; i++){
                 $('#Timeslot').append('<option value='+i+'>'+
@@ -60,8 +61,8 @@
               }
             },
             error: function () {
+              alert("Error!!");
               $('#Timeslot').empty();
-              $('#TimeslotMsgContainer').empty();
               $('#Timeslot').html('<option value=\""\"">Select Timeslot</option>');
               $('#TimeslotsgContainer').html('<p>Error when fetching timeslot data.</p>');
             }
@@ -80,10 +81,10 @@
               $('#Movie').empty();
               $('#Movie').html('<option value=\""\"">Select Movie</option>');
               $('#Movie').append(response);
+              $('#MovieMsgContainer').empty();
             },
             error: function () {
               $('#Movie').empty();
-              $('#MovieMsgContainer').empty();
               $('#Movie').html('<option value=\""\"">Select Movie</option>');
               $('#MovieMsgContainer').html('<p>Error when fetching cinema ' + cinemaName + ' movie data.</p>');
             }
@@ -102,11 +103,11 @@
               $('#Cinema').empty();
               $('#Cinema').html('<option value=\""\"">Select Cinema</option>');
               $('#Cinema').append(response);
+              $('#CinemaMsgContainer').empty();
             },
             error: function (ignore0, ignore1, ignore2) {
               alert("Error!!");
               $('#Cinema').empty();
-              $('#CinemaMsgContainer').empty();
               $('#Cinema').html('<option value=\""\"">Select Cinema</option>');
               $('#CinemaMsgContainer').append('<p>Error when fetching cinema data.</p>');
             }
@@ -119,6 +120,11 @@
           var selectedCinema = $('#Cinema').val();
           alert(selectedCinema);
           fetchMovies(selectedCinema);
+        });
+        $("#Timeslot").change(function(){
+          var selectedMovie = $('#Movie').val();
+          var selectedCinema = $('#Cinema').val();
+          fetchTimeSlots(selectedCinema, selectedMovie);
         });
       });
     </script>    
