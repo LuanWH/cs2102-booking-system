@@ -2,6 +2,15 @@
 <html>   
 
   <head>
+    <style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+    }
+    </style>
 
     <title>All Movies</title>
     <!-- Bootstrap core CSS -->
@@ -16,10 +25,9 @@
 
   </head>
   <body>
-    <div class="table-responsive">
-      <font style = "font-size:20px">All movies</font>
-
-      <table >
+    <div class="table-responsive"> 
+      <center>
+        <table width ="100%">
         <caption> All Movies</caption>
         <tr>
           <th>Movie Title</th>
@@ -47,6 +55,7 @@
          
         
       </table>
+    </center>
     </div>
   </body> 
 

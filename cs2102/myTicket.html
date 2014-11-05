@@ -1,39 +1,55 @@
-<!DOCTYPE html>      
+<!DOCTYPE html> 
+
+
 <html>   
 
   <head>
+    <style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+    }
+    </style>
 
-    <title>My Ticket</title>
+    <center><title>My Ticket</title></center>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
 
     <!-- PHP Script -->   
   </head>
   <body>
     <div id="searchTicket">
-      <font style = "font-size:20px">My Ticket</font>
+      <center><font style = "font-size:20px">My Ticket</font></center>
+      <br>
+      
+      <font style = "font-size:15px"><center> User ID: <input type = "text" id = "UserID" ></center></font><br>
 
-      User Name: <input type = "text" id = "UserName" ><br>
-      User ID: <input type = "text" id = "UserID" ><br>
-
-      <button id = "search">Search my Ticket</button>
-
+      <center><button id = "searchButton">Search my Ticket</button></center>
+      <div id='searchTicketContainer'> </div>
       <script>
-      $("#search").click(
+      $(document).ready(function(){
+       $("#searchButton").click(
         function(){
          $.ajax({
           url: 'searchTicket.php',
           type: 'post',
-          data: {UserName,UserID},
-            success: function(data) {
-            $("#searchTicket").append(data);
-            },
-            error: function(data) {
-              alert(data);
+          data: {"UserID": $('#UserID').val()},
+          success: function(data) {
+            $("#searchTicketContainer").empty();
+            $("#searchTicketContainer").append(data);
+          },
+          error: function(data) {
+            alert(data);
           }
         });
        }
-      );
+      );       
+      });
+
       </script>
     </div>
   </body>  
