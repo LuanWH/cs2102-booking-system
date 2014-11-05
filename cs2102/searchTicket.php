@@ -30,20 +30,20 @@ CSS: <div class= \"UserInfoHeader\">
           echo "
             <table style = \"width:100%\">
               <tr>
-                <th>Movie Title  </th>
-                <th>Cinema Name  </th> 
-                <th>Cinema Location  </th>
-                <th>Hall ID  </th>
-                <th>Start Time  </th>
-                <th>End Time  </th>
+                <th><p class=\"tdp\">Movie Title      </p></th>
+                <th><p class=\"tdp\">Cinema Name      </p></th> 
+                <th><p class=\"tdp\">Cinema Location  </p></th>
+                <th><p class=\"tdp\">Hall ID          </p></th>
+                <th><p class=\"tdp\">Start Time       </p></th>
+                <th><p class=\"tdp\">End Time         </p></th>
               </tr>
               <tr> 
-                <td>".$row["MOVIETITLE"]."</td>
-                <td>".$row["NAME"]."</td>
-                <td>".$row["LOCATION"]."</td>
-                <td>".$row["HALLID"]."</td>
-                <td>".$row["STARTTIME"]."</td>
-                <td>".$row["ENDTIME"]."</td>
+                <td><p class=\"tdp\">".$row["MOVIETITLE"]."</p></td>
+                <td><p class=\"tdp\">".$row["NAME"]."</p></td>
+                <td><p class=\"tdp\"><p class=\"tdp\">".$row["LOCATION"]."</p></td>
+                <td><p class=\"tdp\">".$row["HALLID"]."</p></td>
+                <td><p class=\"tdp\">".$row["STARTTIME"]."</p></td>
+                <td><p class=\"tdp\">".$row["ENDTIME"]."</p></td>
               </tr>
             </table>";
           } while ($row = oci_fetch_array ($stid, OCI_BOTH));
