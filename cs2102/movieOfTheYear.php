@@ -7,8 +7,9 @@
     border: 1px solid black;
     border-collapse: collapse;
     }
-    th, td {
-      padding: 15px;
+   
+    .tdp{
+      margin-left: 5px;
     }
     </style>
 
@@ -30,11 +31,10 @@
         <table width ="100%">
         
         <tr>
-          <th>Movie Title</th>
-          <th>Year</th>
-          <th>Director</th>
-          <th>Actors</th>
-          <th>Description</th>
+          <th><p class = "tdp">Movie Title </p></th>
+          <th><p class = "tdp">Director</p></th>
+          <th><p class = "tdp">Actors</p></th>
+          <th><p class = "tdp">Description</p></th>
         </tr>
         
           <?php
@@ -43,11 +43,10 @@
             oci_execute($stid,OCI_DEFAULT);
             while($row = oci_fetch_array($stid)){
                echo "<tr>". 
-                      "<td>".$row["TITLE"]."</td>".
-                      "<td>".$row["YEAR"]."</td>".
-                      "<td>".$row["DIRECTOR"]."</td>".
-                      "<td>".$row["ACTORS"]."</td>".
-                      "<td>".$row["DESCRIPTION"]."</td>".
+                      "<td><p class = \"tdp\">".$row["TITLE"]."</p></td>".
+                      "<td><p class = \"tdp\">".$row["DIRECTOR"]."</p></td>".
+                      "<td><p class = \"tdp\">".$row["ACTORS"]."</p></td>".
+                      "<td><p class = \"tdp\">".$row["DESCRIPTION"]."</p></td>".
                       "</tr>";
             }
             oci_free_statement($stid);

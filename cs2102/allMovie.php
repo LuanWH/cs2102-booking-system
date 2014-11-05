@@ -7,12 +7,13 @@
     border: 1px solid black;
     border-collapse: collapse;
     }
-    th, td {
-      padding: 15px;
+   
+    .tdp{
+      margin-left: 5px;
     }
     </style>
 
-    <title>All Movies</title>
+    <title>Movie of the Year</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,26 +29,26 @@
     <div class="table-responsive"> 
       <center>
         <table width ="100%">
-        <caption> All Movies</caption>
+        
         <tr>
-          <th>Movie Title</th>
-          <th>Year</th>
-          <th>Director</th>
-          <th>Actors</th>
-          <th>Description</th>
+          <th><p class = "tdp">Movie Title </p></th>
+          <th><p class = "tdp">Movie Year </p></th>
+          <th><p class = "tdp">Director</p></th>
+          <th><p class = "tdp">Actors</p></th>
+          <th><p class = "tdp">Description</p></th>
         </tr>
         
           <?php
-            $sql = "SELECT DISTINCT * from MOVIE";
+            $sql = "SELECT DISTINCT * from MOVIE  ";
             $stid = oci_parse ($dbh,$sql);
             oci_execute($stid,OCI_DEFAULT);
             while($row = oci_fetch_array($stid)){
                echo "<tr>". 
-                      "<td>".$row["TITLE"]."</td>".
-                      "<td>".$row["YEAR"]."</td>".
-                      "<td>".$row["DIRECTOR"]."</td>".
-                      "<td>".$row["ACTORS"]."</td>".
-                      "<td>".$row["DESCRIPTION"]."</td>".
+                      "<td><p class = \"tdp\">".$row["TITLE"]."</p></td>".
+                      "<td><p class = \"tdp\">".$row["YEAR"]."</p></td>".
+                      "<td><p class = \"tdp\">".$row["DIRECTOR"]."</p></td>".
+                      "<td><p class = \"tdp\">".$row["ACTORS"]."</p></td>".
+                      "<td><p class = \"tdp\">".$row["DESCRIPTION"]."</p></td>".
                       "</tr>";
             }
             oci_free_statement($stid);
@@ -63,4 +64,4 @@
     oci_close($dbh);
   ?>    
 
-</html>            
+</html>           
