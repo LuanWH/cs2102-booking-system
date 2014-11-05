@@ -41,8 +41,6 @@ Title: <input type="text" name="Title" id="Title">
 oci_close();
 ?>
 
-
-
 <tr>
 <td colspan="2" style="background-color:#FFA500; text-align:center;"> Copyright &#169; CS2102 </td> </tr>
 </table>
