@@ -22,24 +22,43 @@
         });
       });
 
-      function fetchCinema(name) {
-        if(name != null && name != ""){
+      function fetchMovies(cinemaName) {
+        if(cinemaName != null && cinemaName != ""){
           $.ajax({
-            url:'cinema.php',
-            complete: function (response) {
-              $('#CinemaContainer').empty();
-              $('#CinemaContainer').html(response.responseText);
+            url:'fetchMovies.php',
+            type: 'post',
+            data: cinemaName,
+            success: function (response) {
+              $('#MovieContainer').empty();
+              $('#MovieContainer').html(response.responseText);
             },
             error: function () {
-              $('#CinemaContainer').empty();
-              $('#CinemaMsgContainer').empty();
-              $('#CinemaMsgContainer').html('<p>Error when fetching cinema ' + name + 'data.</p>');
+              $('#MovieContainer').empty();
+              $('#MovieMsgContainer').empty();
+              $('#MovieMsgContainer').html('<p>Error when fetching cinema ' + cinemaName + ' movie data.</p>');
             }
           });          
         }
         return false;
       }
 
+      function fetchCinemas() {
+        if(cinemaName != null && cinemaName != ""){
+          $.ajax({
+            url:'fetchCinemas.php',
+            success: function (response) {
+              $('#CinemaContainer').empty();
+              $('#CinemaContainer').html(response.responseText);
+            },
+            error: function () {
+              $('#CinemaContainer').empty();
+              $('#CinemaMsgContainer').empty();
+              $('#CinemaMsgContainer').html('<p>Error when fetching cinema data.</p>');
+            }
+          });          
+        }
+        return false;
+      }
       function fetchMovie() {
          $.ajax({
             url:'db.php',
@@ -72,11 +91,12 @@
             ?>
           </div>
         </select>
-        <div id = "CinemaMsgContainer"><div>
+        <div id = "CinemaMsgContainer"></div>
         <br>
 
-        <select name="Movie"> 
+        <select id="Movie"> 
           <option value="">Select Movie</option>
+          <div id="MovieContainer"></div>
           <?php
             $sql = "SELECT DISTINCT name FROM cinema";
             $stid = oci_parse ($dbh,$sql);
@@ -87,6 +107,8 @@
             oci_free_statement($stid);
           ?>
         </select>
+        <div id = "MovieMsgContainer"></div>
+        <br>
 
         <input type="submit" name="formSubmit" value="Search" > 
       </form>
