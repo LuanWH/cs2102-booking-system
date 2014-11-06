@@ -1,240 +1,247 @@
-	<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 
-	<html>
-		<head>
-			<title>My Ticket</title>
-			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<meta name="description" content="" />
-			<meta name="keywords" content="" />
-			
-			<script src="js/jquery.min.js"></script>
-			<script src="js/jquery.dropotron.min.js"></script>
-			<script src="js/jquery.scrolly.min.js"></script>
-			<script src="js/jquery.scrollgress.min.js"></script>
-			<script src="js/skel.min.js"></script>
-			<script src="js/skel-layers.min.js"></script>
-			<script src="js/init.js"></script>
-			<noscript>
-				<link rel="stylesheet" href="css/skel.css" />
-				<link rel="stylesheet" href="css/style.css" />
-				<link rel="stylesheet" href="css/style-wide.css" />
-				<link rel="stylesheet" href="css/style-noscript.css" />
-			</noscript>
-			<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-			<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
-		</head>
-		<body class="index">
+<html>
+	<head>
+		<title>My Ticket</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
 		
-			<!-- Header -->
-				<header id="header" class="alt">
-					<h1 id="logo"><a href="index.html">Enjoyable <span> iTicket </span></a></h1>
-					<nav id="nav">
-						<ul>
-							<li class="current"><a href="index.html">Welcome</a></li>
-						</ul>
-					</nav>
-				</header>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/jquery.scrollgress.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+			<link rel="stylesheet" href="css/style-noscript.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="index">
+	
+		<!-- Header -->
+			<header id="header" class="alt">
+				<h1 id="logo"><a href="index.html">Enjoyable <span> iTicket </span></a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="current"><a href="index.html">Welcome</a></li>
+					</ul>
+				</nav>
+			</header>
 
-			<!-- Banner -->		
-				<section id="banner">
-					
-					<!--
-						".inner" is set up as an inline-block so it automatically expands
-						in both directions to fit whatever's inside it. This means it won't
-						automatically wrap lines, so be sure to use line breaks where
-						appropriate (<br />).
-					-->
-					<div class="inner">
-						
-						<header>
-							<h2>iTicket</h2>
-						</header>
-						<p>This is <strong>iMovie</strong>, a responsive
-						<br />
-						movie booking website
-						<br />
-						</p>
-						<footer>
-							<ul class="buttons vertical">
-								<li><a href="#main" class="button fit scrolly">
-									iTicket</a></li>
-							</ul>
-						</footer>
-					
-					</div>
-					
-				</section>
-			
-			<!-- Main -->
-				<article id="main">
-
-					<header class="special container">
-						<span class="icon fa-bar-chart-o"></span>
-						<h2> <strong><center>
-							My ID: <input type = "text" id = "UserID" 
-							style = "text-align:center ; size : 20"
-							></center></strong> 
-						<br />
-						    <center><button id = "searchButton" class="button fit scrolly">
-						    	Search my Ticket</button></center>
-					</header>
-						
-					<!-- One -->
-
-						<section class="wrapper style3 container special">
-						
-							<header class="major">
-								<h2>Enjoy movie <strong>Alone</strong></h2>
-							</header>
-						
-							<div class="row" id='searchTicketContainer'>
-								
-								<div class="6u 12u(2)">
-								
-									<section>
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<header>
-											<h3>A Really Fast Train</h3>
-										</header>
-										<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
-									</section>
-
-								</div>
-								<div class="6u 12u(2)">
-								
-									<section>
-										<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-										<header>
-											<h3>An Airport Terminal</h3>
-										</header>
-										<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
-									</section>
-
-								</div>
-							</div>
-						</div>
-
-							<footer class="major">
-								<ul class="buttons">
-									<li><a href="#" class="button">See More</a></li>
-								</ul>
-							</footer>
-						
-						</section>
-						
-				</article>
-				 
-	      <script>
-	      $(document).ready(function(){
-	       $("#searchButton").click(
-	        function(){
-	         $.ajax({
-	          url: 'searchTicket.php',
-	          type: 'post',
-	          data: {"UserID": $('#UserID').val()},
-	          success: function(data) {
-	            $("#searchTicketContainer").empty();
-	            tickets = eval(data);
-	            for(var i = 0 ; i < tickets.length; i++){
-	            	$("#searchTicketContainer").append(
-							'<div class="6u 12u(2)">		
-									<section>
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<header>
-											<h3>'+tickets[i].Movie+'</h3>
-										</header>
-										<p>
-										Cinema: '+tickets[i].Cinema+'<br>
-										Location: '+tickets[i].Location+'<br>
-										Hall: '+tickets[i].Hall+'<br>
-										Start Time: '+tickets[i].Start+'<br>
-										End Time: '+tickets[i].End+'<br>
-										</p>
-									</section>
-								</div>'
-	            		);          
-	            }
-	            
-	          },
-	          error: function(data) {
-	            alert(data);
-	          }
-	        });
-	       }
-	      );       
-	      });
-	      </script>
-						
-						
-					<!-- Two -->
-						<section class="wrapper style1 container special">
-							<div class="row">
-								<div class="4u 12u(2)">
-								
-									<section>
-										<span class="icon featured fa-check"></span>
-										<header>
-											<h3>This is Something</h3>
-										</header>
-										<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
-									</section>
-								
-								</div>
-								<div class="4u 12u(2)">
-								
-									<section>
-										<span class="icon featured fa-check"></span>
-										<header>
-											<h3>Also Something</h3>
-										</header>
-										<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
-									</section>
-								
-								</div>
-								<div class="4u 12u(2)">
-								
-									<section>
-										<span class="icon featured fa-check"></span>
-										<header>
-											<h3>Probably Something</h3>
-										</header>
-										<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
-									</section>
-								
-								</div>
-							</div>
-						</section>
-						
-					
-			<!-- CTA -->
-				<section id="cta">
+		<!-- Banner -->		
+			<section id="banner">
 				
+				<!--
+					".inner" is set up as an inline-block so it automatically expands
+					in both directions to fit whatever's inside it. This means it won't
+					automatically wrap lines, so be sure to use line breaks where
+					appropriate (<br />).
+				-->
+				<div class="inner">
+					
 					<header>
-						<h2>Ready to do <strong>something</strong>?</h2>
+						<h2>iTicket</h2>
 					</header>
+					<p>This is <strong>iMovie</strong>, a responsive
+					<br />
+					movie booking website
+					<br />
+					</p>
 					<footer>
-						<ul class="buttons">
-							<li><a href="#" class="button special">Like Us</a></li>
-							<li><a href="#" class="button">LOL I dont like</a></li>
+						<ul class="buttons vertical">
+							<li><a href="#main" class="button fit scrolly">
+								iTicket</a></li>
 						</ul>
 					</footer>
 				
-				</section>
-
-			<!-- Footer -->
-				<footer id="footer">
+				</div>
 				
-					<ul class="icons">
-						<li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
-						<li><a href="#" class="icon circle fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li>
+			</section>
+		
+		<!-- Main -->
+			<article id="main">
+
+				<header class="special container">
+					<span class="icon fa-bar-chart-o"></span>
+					<h2> <strong><center>
+						My ID: <input type = "text" id = "UserID" 
+						style = "text-align:center ; size : 20"
+						></center></strong> 
+					<br/>
+					    <center>
+					    	<button id = "searchButton" class="button fit">
+					    	Search my Ticket</button>
+					    </center>
+				</header>
+					
+				<!-- One -->
+
+					<section class="wrapper style3 container special">
+					
+						<header class="major">
+						<div id = "alertInfoContainer">
+							<h2>Enjoy movie <strong>Alone</strong></h2>
+						</div>
+						</header>
+						
+						<div class="row" id='searchTicketContainer'>
+
+							<div class="6u 12u(2)">								
+								<section>
+									<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+									<header>
+										<h3>A Really Fast Train</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+								</section>
+							</div>
+							<div class="6u 12u(2)">								
+								<section>
+									<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+									<header>
+										<h3>An Airport Terminal</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+								</section>
+
+							</div>
+						</div>
+					</div>
+						<footer class="major">
+							<ul class="buttons">
+								<li><a href="#" class="button">See More</a></li>
+							</ul>
+						</footer>					
+					</section>						
+			</article>				 
+      <script>
+      $(document).ready(function(){
+      	//alert("document ready");
+       $("#searchButton").click(
+        function(){
+        	//alert("cliked");
+         	$.ajax({
+	          url: 'searchTicket.php',
+	          type: 'post',
+	          data: {"UserID": $('#UserID').val()},
+	          dataType:'text',
+	          success: function(data) {
+	          	//alert(data);
+
+	            $("#searchTicketContainer").empty();
+
+	            if(data.toString().trim() == "noInput"){
+	            	$("#alertInfoContainer").empty();
+	            	//alert("inNoInput");
+	          		$("#alertInfoContainer").append('<h2>Please Enter Your <strong>ID</strong></h2>');
+	          		return;
+	          	}else if(data.toString().trim() == "false"){
+	          		$("#alertInfoContainer").empty();
+	          		$("#alertInfoContainer").append('<h2>You have no Ticket yet, start <strong><a href=\"booking.html\">Booking Now!</a></strong></h2>');
+	          		return;
+	          	}else {
+	          			$("#alertInfoContainer").empty();
+	          			$("#alertInfoContainer").append('<h2>Enjoy Movie <strong>Alone</strong></h2>');
+	          		
+		            	var tickets = eval(data);  
+		            	for(var i = 0 ; i < tickets.length; i++){
+		            	$("#searchTicketContainer").append('<div class=\"6u 12u(2)\"> <section> <a href=\"#\" class=\"image featured\"><img src=\"images/pic01.jpg\" alt=\"\" /></a> <header><h3>'+
+								tickets[i].Movie+
+								'</h3> </header> <p> Cinema: '+
+								tickets[i].Cinema+
+								'<br> Location: '+tickets[i].Location+'<br> Hall: '+
+								tickets[i].Hall+
+								'<br> Start Time: '+tickets[i].Start+
+								'<br> End Time: '+tickets[i].End+'<br></p> </section> </div>');
+						} 
+	            }        
+	          },
+          		error: function() {
+            	alert("failed");
+          }
+        });
+       }
+      );       
+      });
+      </script>
+					
+					
+				<!-- Two -->
+					<section class="wrapper style1 container special">
+						<div class="row">
+							<div class="4u 12u(2)">
+							
+								<section>
+									<span class="icon featured fa-check"></span>
+									<header>
+										<h3>This is Something</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+								</section>
+							
+							</div>
+							<div class="4u 12u(2)">
+							
+								<section>
+									<span class="icon featured fa-check"></span>
+									<header>
+										<h3>Also Something</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+								</section>
+							
+							</div>
+							<div class="4u 12u(2)">
+							
+								<section>
+									<span class="icon featured fa-check"></span>
+									<header>
+										<h3>Probably Something</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+								</section>
+							
+							</div>
+						</div>
+					</section>
+					
+				
+		<!-- CTA -->
+			<section id="cta">
+			
+				<header>
+					<h2>Ready to do <strong>something</strong>?</h2>
+				</header>
+				<footer>
+					<ul class="buttons">
+						<li><a href="#" class="button special">Like Us</a></li>
+						<li><a href="#" class="button">LOL I dont like</a></li>
 					</ul>
-					
-					
-				
 				</footer>
+			
+			</section>
 
-		</body>
-	</html>
+		<!-- Footer -->
+			<footer id="footer">
+			
+				<ul class="icons">
+					<li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
+					<li><a href="#" class="icon circle fa-github"><span class="label">Github</span></a></li>
+					<li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li>
+				</ul>
+				
+				
+			
+			</footer>
+
+	</body>
+</html>
