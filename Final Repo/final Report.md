@@ -16,16 +16,16 @@ The back ends, which is hidden from users' aspects, processes issued command pas
 #####Component and Technologies Used
 ***
 ###### User Interface
-In order to constrcut an effeictive uer interface for our web applications, we have applied a right mix of a variaty of technologies including HTML, CSS and Javascript. We are aimed to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
-
+In order to constrcut an effeictive uer interface for our web applications, we have applied a right mix of a variaty of technologies including HTML, CSS, Javascript and Ajax. We are aimed to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
 
 ###### Web Server
-
-###### Server page language
+We use PHP as server page language,
 
 ###### Database 
+Oracle SQL is used as database in our web application.
 
 #####Database Schema
+
 
 #####Functionalites & SQL implementation
 ***
@@ -33,48 +33,44 @@ In order to constrcut an effeictive uer interface for our web applications, we h
 #####Browsing
 
 - **Display Movie list**
+
 	Users are able to view all the movies by simply click the All Movie button in the navi bar, the page will display the whole list of movies:
 	<br><br><br>
-	<img src="allMovie1.png"  style="width: 800px;"/>
+	<img src="bMovie.png"  style="width: 800px;"/>
 	<br><br>
-	
-- **Display Cinema list**
 
-		SELECT DISTINCT name FROM cinema
+		SELECT DISTINCT name FROM MOVIE;
 
 
 #####Searching
-
-- **Search for Movie**
-
----
-
-- **Search for Cinema**
 
 ---
 - **Search for Booked Ticket**
 
 	User can search for their booked ticket by simply enter their unique user ID.
-	
+	<br><br><br>
+	<img src="sT0.png"  style="width: 800px;"/>
+	<br><br>
 	Use cases:
 	- Input User ID is empty:
 	
-		For this situation, the page will prompt: 
+	For this situation, the page will prompt: 
 	
 	<br><br><br>
-	<img src="searchTick2.png"  style="width: 800px;"/>
+	<img src="sT1.png"  style="width: 800px;"/>
 	<br><br>
 	
 	- Input User ID has no correspondint entry in ticket database :
 	
-		For this situation, the page will prompt: 
+	For this situation, the page will prompt: 
+		
 	<br><br><br>
-	<img src="searchTick1.png"  style="width: 800px;"/>
+	<img src="sT2.png"  style="width: 800px;"/>
 	<br><br>
 		
-		For successful search, the result will be displayed as:
+	For successful search, the result will be displayed as:
 	<br><br><br>
-	<img src="searchTick3.png"  style="width: 800px;"/>
+	<img src="sT3.png"  style="width: 800px;"/>
 	<br><br>
 
 	To facilitate this search,we have implemented the SQL query code as follows:
