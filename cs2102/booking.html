@@ -13,88 +13,145 @@
   <body>
     <div class="table-responsive">
       <div id = "bookTicketContainer">
-        <font style = "font-size:30px">Book Your Tickets</font>
+        <center><font style = "font-size:30px">Book Your Tickets</font></center>
+        <hr>
         <form>
-          <p>UserID: <input type="text" name="name" id="UserID"> <span style="color:red" id="UserIDMsgContainer"></span></p>
+          <p>UserID: <input type="text" name="name" id="UserID"> <img id = "wrongIdImg" src="./pictures/wrong.png" alt="Wrong" style="width:15px;height:15px;display:none"/><img id ="yesIdImg" src="./pictures/yes.png" alt="Yes" style="width:15px;height:15px;display:none"/><span style="color:red" id="UserIDMsgContainer"></span></p>
            
           <br>
           <p>Cinema: </p>
           <select id="Cinema" name="cinema"> 
             <option value="">Select Cinema</option>
           </select>
-          <div id = "CinemaMsgContainer"></div>
+          <div id = "CinemaMsgContainer"></div><div id = "CinemaErrMsgContainer"></div>
           <br>
 
           <p>Movie: </p>
           <select id="Movie" name = "movie"> 
             <option value="">Select Movie</option>
           </select>
-          <div id = "MovieMsgContainer"></div>
+          <div id = "MovieMsgContainer"></div><div id = "MovieErrMsgContainer"></div>
           <br>
           <p>Timeslot: </p>
           <select id="Timeslot" name="timeslot"> 
             <option value="">Select Timeslot</option>
           </select>
-          <div id = "TimeslotMsgContainer"></div>
+          <div id = "TimeslotMsgContainer"></div><div id = "TimeslotErrMsgContainer"></div>
           <br>        
-
-          <button onclick = "bookTicket()">Book!</button>
         </form>
+        <button onclick = "bookTicket()">Book!</button>
       </div>
+      <div id = "bookResultContainer">
+        <center><p><font style = "font-size:30px">Booking Result</font></p></center>
+        <hr>
+        <p><font style="font-size:20px">You have successfully booked a ticket! Please refer to the details below.</font></p>
+        
+        <div id="resultContainer" style="background:#eee">
+          Your User ID: <pre id='ResultUserID'></pre><br>
+          Movie: <pre id='ResultMovie'></pre><br>
+          Cinema: <pre id='ResultCinema'></pre><br>
+          Hall: <pre id='ResultHall'></pre><br>
+          Time: <pre id='ResultTime'></pre><br>
+        </div>
+        <br>
+        <button onclick="showBookTicket()">Book Another Ticket</button>
+      </div>      
     </div>
     <script type="text/javascript">
+      var timeSlotMap = [];
+
+      function showBookTicket(){
+        $('#bookResultContainer').fadeOut("slow");
+        $('#bookTicketContainer').fadeIn();
+      }
+      function showResult(){
+        var mapIndex = parseInt($('#Timeslot').val());
+        $('#bookTicketContainer').fadeOut("slow");
+
+        $('#ResultUserID').html("<p style='color:blue'>"+$('#UserID').val()+"</p>");
+        $('#ResultMovie').html("<p style='color:blue'>"+$('#Movie').val()+"</p>");
+        $('#ResultCinema').html("<p style='color:blue'>"+$('#Cinema').val()+"</p>");
+        $('#ResultHall').html("<p style='color:blue'>"+String(timeSlotMap[mapIndex].hallID)+"</p>");
+        $('#ResultTime').html("<p style='color:blue'>"+String(timeSlotMap[mapIndex].startTime)+" to "+String(timeSlotMap[mapIndex].endTime)+"</p>");
+
+        $('#bookResultContainer').fadeIn();
+
+        fetchCinemas();
+        fetchMovies(null);
+        fetchTimeslots(null,null);
+        $('#UserID').val('');
+        timeSlotMap = [];
+        $('#UserIDMsgContainer').empty();
+        $('#CinemaMsgContainer').empty();
+        $('#MovieMsgContainer').empty();
+        $('#TimeslotMsgContainer').empty();
+
+      }
+
       function bookTicket(){
 
         var hasCinema = $('#Cinema').val() != null && $('#Cinema').val() != "";
         var hasMovie = $('#Movie').val() != null && $('#Movie').val() != "";
         var hasTimeslot = $('#Timeslot').val() != null && $('#Timeslot').val() != "";
-        var hasUserID = $('#UserID').val()!=null && $('userID').val() != "";
-        var hasValidUserID = hasUserID && !isNaN($('UserID').val());
-
+        var hasUserID = $('#UserID').val()!=null && $('#UserID').val() != "";
+        var hasValidUserID = hasUserID && !isNaN($('#UserID').val());
+        //alert(hasCinema+hasMovie+hasTimeslot+hasUserID+hasValidUserID);
         if(!hasCinema){
-          $('#CinemaMsgContainer').html('<p style="color:red">Please choose a cinema!</p>');
+          $('#CinemaErrMsgContainer').html('<p style="color:red">Please choose a cinema!</p>');
         } else {
-          $('#CinemaMsgContainer').empty();
+          $('#CinemaErrMsgContainer').empty();
         }
 
         if(!hasMovie){
-          $('#MovieMsgContainer').html('<p style="color:red">Please choose a movie!</p>');
+          $('#MovieErrMsgContainer').html('<p style="color:red">Please choose a movie!</p>');
         }else{
-          $('#MovieMsgContainer').empty();
+          $('#MovieErrMsgContainer').empty();
         }
 
         if(!hasTimeslot){
-          $('#TimeslotMsgContainer').html('<p style="color:red">Please choose a timeslot!</p>')
+          $('#TimeslotErrMsgContainer').html('<p style="color:red">Please choose a timeslot!</p>')
         } else {
-          $('#TimeslotMsgContainer').empty();
+          $('#TimeslotErrMsgContainer').empty();
         }
 
-        if(hasUserID && !hasValidUserID){
+        if((hasUserID && !hasValidUserID)||(hasUserID&&!checkUserValidation(parseInt($('#UserID').val())))){
           $('#UserIDMsgContainer').html('Please enter a valid user ID!');
         } else if(!hasUserID){
           $('#UserIDMsgContainer').html('Please enter a user ID!');
         } else {
           $('#UserIDMsgContainer').empty();
         }
-
+        //alert("lastcheck");
+        //alert(hasCinema+hasMovie+hasTimeslot+hasUserID+hasValidUserID+(timeSlotMap!=null));
         if(hasCinema&&hasMovie&&hasTimeslot&&hasUserID&&hasValidUserID&&timeSlotMap!=null){
+          //alert(timeSlotMap[0]+','+timeSlotMap[1]+','+timeSlotMap[2]);
+         //alert("startbooking");
+          var mapIndex = parseInt($('#Timeslot').val());
+          $('#UserIDMsgContainer').empty();
           $.ajax({
             url:'bookResult.php',
             type: 'post',
             data: {
                     'cinemaName': $('#Cinema').val(),
                     'movieTitle': $('#Movie').val(),
-                    'userID': $('#UserName').val(),
-                    'startTime': timeSlotMap[0],
-                    'endTime': timeSlotMap[1],
-                    'hallID': timeSlotMap[2]
-                  },
+                    'userID': $('#UserID').val(),
+                    'startTime': String(timeSlotMap[mapIndex].startTime),
+                    'endTime': String(timeSlotMap[mapIndex].endTime),
+                    'hallID': String(timeSlotMap[mapIndex].hallID)
+                  }, 
+            success: function(response){
+              //alert(response);
+              showResult();
+            },
+            error: function(){
+                      alert("Ticket booking faile! Please try again later.");
+                    }
           });
         }
       }
 
 
-      var timeSlotMap = [];
+      
       function fetchTimeslots(cinemaName, movieTitle){
         if(cinemaName != null && cinemaName != "" &&
            movieTitle != null && movieTitle != ""){
@@ -170,10 +227,43 @@
             }
           });                
         }
+      var isValid = false;
+      function checkUserValidation(id){
+        
+         $.ajax({
+          url:'checkUserId.php',
+          dataType: 'text',
+          type: 'post',
+          data: {'id': id},
+          success: function (response) {
+            //alert("response is -->"+response+"<--");
+            var x = eval(response);
+            // alert("x is "+x);
+            // alert("x[0] is "+x[0]);
+            // alert("x[0].validation is "+x[0].validation);
+            if(x[0].validation == 'true'){
+              $('#wrongIdImg').hide();
+              $('#yesIdImg').show();  
+            }else{
+              $('#wrongIdImg').show();
+              $('#yesIdImg').hide();  
+            }
+            
+          },
+          error: function () {
+            isValid = false;
+            $('#wrongIdImg').show();
+            $('#yesIdImg').hide();              
+          }
+        }); 
+         //alert("isValid is "+isValid);
+        return isValid;      
+      }
 
       $(document).ready(function(){
 
         fetchCinemas();
+        $('#bookResultContainer').hide();
 
         $( "#Cinema" ).change(function() {
           var selectedCinema = $('#Cinema').val();
@@ -185,6 +275,25 @@
           var selectedMovie = $('#Movie').val();
           var selectedCinema = $('#Cinema').val();
           fetchTimeslots(selectedCinema, selectedMovie);
+        });
+
+        $('#UserID').change(function(){
+
+          var id = parseInt($('#UserID').val());
+          if(id == NaN || id < 0){
+            $('#wrongIdImg').show();
+            $('#yesIdImg').hide();
+          } else {
+            var chkResult = checkUserValidation(id);
+            // alert("chkResult is "+chkResult);
+            // if(chkResult){
+            //   $('#wrongIdImg').hide();
+            //   $('#yesIdImg').show();              
+            // } else {
+            //   $('#wrongIdImg').show();
+            //   $('#yesIdImg').hide();            
+            // }
+          }
         });
       });
     </script>    
