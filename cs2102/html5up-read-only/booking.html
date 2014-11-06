@@ -43,13 +43,11 @@
 				        <center><p><font style = "font-size:20px">Booking Result</font></p></center>
 				        <hr>
 				        <p><font style="font-size:15px">You have successfully booked a ticket! Please refer to the details below.</font></p>
-				        <div id="resultContainer" style="background:#eee">
-				          Your User ID: <pre id='ResultUserID'></pre><br>
-				          Movie: <pre id='ResultMovie'></pre><br>
-				          Cinema: <pre id='ResultCinema'></pre><br>
-				          Hall: <pre id='ResultHall'></pre><br>
-				          Time: <pre id='ResultTime'></pre><br>
-				        </div>						
+				          <p>Your User ID: <span id='ResultUserID'></span></p>
+				          <p>Movie: <span id='ResultMovie'></span></p>
+				          <p>Cinema: <span id='ResultCinema'></span></p>
+				          <p>Hall: <span id='ResultHall'></span></p>
+				          <p>Time: <span id='ResultTime'></span></p>
 					</div>
 					<footer>
 						<ul class="icons">
@@ -132,11 +130,11 @@
 
 	      function showResult(){
 	        var mapIndex = parseInt($('#Timeslot').val());
-	        $('#ResultUserID').html("<p style='color:blue'>"+$('#UserID').val()+"</p>");
-	        $('#ResultMovie').html("<p style='color:blue'>"+$('#Movie').val()+"</p>");
-	        $('#ResultCinema').html("<p style='color:blue'>"+$('#Cinema').val()+"</p>");
-	        $('#ResultHall').html("<p style='color:blue'>"+String(timeSlotMap[mapIndex].hallID)+"</p>");
-	        $('#ResultTime').html("<p style='color:blue'>"+String(timeSlotMap[mapIndex].startTime)+" to "+String(timeSlotMap[mapIndex].endTime)+"</p>");
+	        $('#ResultUserID').html("<p>"+$('#UserID').val()+"</p>");
+	        $('#ResultMovie').html("<p>"+$('#Movie').val()+"</p>");
+	        $('#ResultCinema').html("<p>"+$('#Cinema').val()+"</p>");
+	        $('#ResultHall').html("<p>"+String(timeSlotMap[mapIndex].hallID)+"</p>");
+	        $('#ResultTime').html("<p>"+String(timeSlotMap[mapIndex].startTime)+" to "+String(timeSlotMap[mapIndex].endTime)+"</p>");
 
 	        $('#bookResultContainer').fadeIn();
 
@@ -205,6 +203,7 @@
 	                  }, 
 	            success: function(response){
 	              //alert(response);
+	              alert("Ticket booking successful! Thank you for booking with us.");
 	              showResult();
 	            },
 	            error: function(){
