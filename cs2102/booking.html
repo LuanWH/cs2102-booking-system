@@ -12,33 +12,37 @@
   </head>
   <body>
     <div class="table-responsive">
-      <font style = "font-size:20px">Book Your Tickets</font>
+      <font style = "font-size:30px">Book Your Tickets</font>
       <form>
-        <p>User Name: <input type="text" name="UserName" id="UserName"></p>  
-        <select id="Cinema"> 
+        <p>User Name: <input type="text" name="name" id="UserName"></p> 
+         
+        <br>
+        <p>Cinema: </p>
+        <select id="Cinema" name="cinema"> 
           <option value="">Select Cinema</option>
         </select>
         <div id = "CinemaMsgContainer"></div>
         <br>
 
-        <select id="Movie"> 
+        <p>Movie: </p>
+        <select id="Movie" name = "movie"> 
           <option value="">Select Movie</option>
         </select>
         <div id = "MovieMsgContainer"></div>
         <br>
-
-        <select id="Timeslot"> 
+        <p>Timeslot: </p>
+        <select id="Timeslot" name="timeslot"> 
           <option value="">Select Timeslot</option>
         </select>
         <div id = "TimeslotMsgContainer"></div>
         <br>        
 
-        <input type="submit" name="formSubmit" value="Book" > 
+        <button>Book!</button>
       </form>
     </div>
     <script type="text/javascript">
       var timeSlotMap = [];
-      function fetchTimeSlots(cinemaName, movieTitle){
+      function fetchTimeslots(cinemaName, movieTitle){
         if(cinemaName != null && cinemaName != "" &&
            movieTitle != null && movieTitle != ""){
           $.ajax({
@@ -46,10 +50,9 @@
             type: 'post',
             data: {'cinemaName': cinemaName,
                    'movieTitle': movieTitle},
-            dataType: 'json',
+            dataType: 'text',
             success: function (response) {
-              timeSlotMap = response;
-              alert(response);
+              timeSlotMap = eval(response);
               $('#Timeslot').empty();
               $('#TimeslotMsgContainer').empty();
               $('#Timeslot').html('<option value=\""\"">Select Timeslot</option>');
@@ -61,10 +64,9 @@
               }
             },
             error: function () {
-              alert("Error!!");
               $('#Timeslot').empty();
               $('#Timeslot').html('<option value=\""\"">Select Timeslot</option>');
-              $('#TimeslotsgContainer').html('<p>Error when fetching timeslot data.</p>');
+              $('#TimeslotMsgContainer').html('<p>Error when fetching timeslot data.</p>');
             }
           });           
         }
@@ -77,7 +79,6 @@
             type: 'post',
             data: {'cinemaName': cinemaName},
             success: function (response) {
-              alert(response);
               $('#Movie').empty();
               $('#Movie').html('<option value=\""\"">Select Movie</option>');
               $('#Movie').append(response);
@@ -99,14 +100,12 @@
             url:'fetchCinemas.php',
             dataType: 'text',
             success: function (response) {
-              alert("Success!!"+response);
               $('#Cinema').empty();
               $('#Cinema').html('<option value=\""\"">Select Cinema</option>');
               $('#Cinema').append(response);
               $('#CinemaMsgContainer').empty();
             },
             error: function (ignore0, ignore1, ignore2) {
-              alert("Error!!");
               $('#Cinema').empty();
               $('#Cinema').html('<option value=\""\"">Select Cinema</option>');
               $('#CinemaMsgContainer').append('<p>Error when fetching cinema data.</p>');
@@ -115,16 +114,18 @@
         }
 
       $(document).ready(function(){
+
         fetchCinemas();
+
         $( "#Cinema" ).change(function() {
           var selectedCinema = $('#Cinema').val();
-          alert(selectedCinema);
           fetchMovies(selectedCinema);
         });
-        $("#Timeslot").change(function(){
+
+        $("#Movie").change(function(){
           var selectedMovie = $('#Movie').val();
           var selectedCinema = $('#Cinema').val();
-          fetchTimeSlots(selectedCinema, selectedMovie);
+          fetchTimeslots(selectedCinema, selectedMovie);
         });
       });
     </script>    
