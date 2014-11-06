@@ -86,9 +86,8 @@
 							<header class="major">
 								<h2>Enjoy movie <strong>Alone</strong></h2>
 							</header>
-						
+							
 							<div class="row" id='searchTicketContainer'>
-								
 								<div class="6u 12u(2)">
 								
 									<section>
@@ -112,7 +111,7 @@
 
 								</div>
 							</div>
-						</div>
+							
 
 							<footer class="major">
 								<ul class="buttons">
@@ -134,27 +133,7 @@
 	          data: {"UserID": $('#UserID').val()},
 	          success: function(data) {
 	            $("#searchTicketContainer").empty();
-	            tickets = eval(data);
-	            for(var i = 0 ; i < tickets.length; i++){
-	            	$("#searchTicketContainer").append(
-							'<div class="6u 12u(2)">		
-									<section>
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<header>
-											<h3>'+tickets[i].Movie+'</h3>
-										</header>
-										<p>
-										Cinema: '+tickets[i].Cinema+'<br>
-										Location: '+tickets[i].Location+'<br>
-										Hall: '+tickets[i].Hall+'<br>
-										Start Time: '+tickets[i].Start+'<br>
-										End Time: '+tickets[i].End+'<br>
-										</p>
-									</section>
-								</div>'
-	            		);          
-	            }
-	            
+	            $("#searchTicketContainer").append(data);
 	          },
 	          error: function(data) {
 	            alert(data);

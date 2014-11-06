@@ -23,31 +23,43 @@ CSS: <div class= \"UserInfoHeader\">
              AND S.SUBSCRIBERID = ".$_POST["UserID"];
       $stid = oci_parse ($dbh,$sql);
       oci_execute($stid,OCI_DEFAULT);
+      $start = 1;
       if ($row = oci_fetch_array ($stid, OCI_BOTH)) {
-          echo "<div class= \"UserInfoHeader\">User ID:".$row["SUBSCRIBERID"]."<br>".
-               "User Name:". $row["USERNAME"]."<br> </div>
-               <table style = \"width:100%\">";
-          echo  "<tr>
-                <th><p class=\"tdp\">Movie Title      </p></th>
-                <th><p class=\"tdp\">Cinema Name      </p></th> 
-                <th><p class=\"tdp\">Cinema Location  </p></th>
-                <th><p class=\"tdp\">Hall ID          </p></th>
-                <th><p class=\"tdp\">Start Time       </p></th>
-                <th><p class=\"tdp\">End Time         </p></th>
-                </tr>";
+          // echo "<div class= \"UserInfoHeader\">User ID:".$row["SUBSCRIBERID"]."<br>".
+          //      "User Name:". $row["USERNAME"]."<br> </div>
+          //      <table style = \"width:100%\">";
+          // echo  "<tr>
+          //       <th><p class=\"tdp\">Movie Title      </p></th>
+          //       <th><p class=\"tdp\">Cinema Name      </p></th> 
+          //       <th><p class=\"tdp\">Cinema Location  </p></th>
+          //       <th><p class=\"tdp\">Hall ID          </p></th>
+          //       <th><p class=\"tdp\">Start Time       </p></th>
+          //       <th><p class=\"tdp\">End Time         </p></th>
+          //       </tr>";
+          Echo "[";
           do {
-          echo 
-            
-              "<tr> 
-                <td><p class=\"tdp\">".$row["MOVIETITLE"]."</p></td>
-                <td><p class=\"tdp\">".$row["NAME"]."</p></td>
-                <td><p class=\"tdp\"><p class=\"tdp\">".$row["LOCATION"]."</p></td>
-                <td><p class=\"tdp\">".$row["HALLID"]."</p></td>
-                <td><p class=\"tdp\">".$row["STARTTIME"]."</p></td>
-                <td><p class=\"tdp\">".$row["ENDTIME"]."</p></td>
-              </tr>";
+              if(start != 1){
+                echo ',';
+              }
+              $start = 0;
+              echo '{
+                "Movie": "'.$row['MOVIETITLE'].
+                '", "Cinema": "'.$row['NAME'].
+                '", "Location": "'.$row['LOCATION'].
+                '", "Hall": "'.$row['HALLID'].
+                '", "Start": "'.$row['STARTTIME'].
+                '", "End": "'.$row['ENDTIME'].'"}';
+              
+              // "<tr> 
+              //   <td><p class=\"tdp\">".$row["MOVIETITLE"]."</p></td>
+              //   <td><p class=\"tdp\">".$row["NAME"]."</p></td>
+              //   <td><p class=\"tdp\"><p class=\"tdp\">".$row["LOCATION"]."</p></td>
+              //   <td><p class=\"tdp\">".$row["HALLID"]."</p></td>
+              //   <td><p class=\"tdp\">".$row["STARTTIME"]."</p></td>
+              //   <td><p class=\"tdp\">".$row["ENDTIME"]."</p></td>
+              // </tr>";
           } while ($row = oci_fetch_array ($stid, OCI_BOTH));
-          echo " </table>";
+          echo "]";
         } 
       else {
           echo "Sorry, you have not registered or you havenot book any ticket yet, start ".
@@ -57,6 +69,8 @@ CSS: <div class= \"UserInfoHeader\">
       }  
 
 }
+  oci_free_statement($stid);
+  oci_close($dbh);
 
 ?>
           
