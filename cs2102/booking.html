@@ -12,35 +12,88 @@
   </head>
   <body>
     <div class="table-responsive">
-      <font style = "font-size:30px">Book Your Tickets</font>
-      <form>
-        <p>User Name: <input type="text" name="name" id="UserName"></p> 
-         
-        <br>
-        <p>Cinema: </p>
-        <select id="Cinema" name="cinema"> 
-          <option value="">Select Cinema</option>
-        </select>
-        <div id = "CinemaMsgContainer"></div>
-        <br>
+      <div id = "bookTicketContainer">
+        <font style = "font-size:30px">Book Your Tickets</font>
+        <form>
+          <p>UserID: <input type="text" name="name" id="UserID"> <span style="color:red" id="UserIDMsgContainer"></span></p>
+           
+          <br>
+          <p>Cinema: </p>
+          <select id="Cinema" name="cinema"> 
+            <option value="">Select Cinema</option>
+          </select>
+          <div id = "CinemaMsgContainer"></div>
+          <br>
 
-        <p>Movie: </p>
-        <select id="Movie" name = "movie"> 
-          <option value="">Select Movie</option>
-        </select>
-        <div id = "MovieMsgContainer"></div>
-        <br>
-        <p>Timeslot: </p>
-        <select id="Timeslot" name="timeslot"> 
-          <option value="">Select Timeslot</option>
-        </select>
-        <div id = "TimeslotMsgContainer"></div>
-        <br>        
+          <p>Movie: </p>
+          <select id="Movie" name = "movie"> 
+            <option value="">Select Movie</option>
+          </select>
+          <div id = "MovieMsgContainer"></div>
+          <br>
+          <p>Timeslot: </p>
+          <select id="Timeslot" name="timeslot"> 
+            <option value="">Select Timeslot</option>
+          </select>
+          <div id = "TimeslotMsgContainer"></div>
+          <br>        
 
-        <button>Book!</button>
-      </form>
+          <button onclick = "bookTicket()">Book!</button>
+        </form>
+      </div>
     </div>
     <script type="text/javascript">
+      function bookTicket(){
+
+        var hasCinema = $('#Cinema').val() != null && $('#Cinema').val() != "";
+        var hasMovie = $('#Movie').val() != null && $('#Movie').val() != "";
+        var hasTimeslot = $('#Timeslot').val() != null && $('#Timeslot').val() != "";
+        var hasUserID = $('#UserID').val()!=null && $('userID').val() != "";
+        var hasValidUserID = hasUserID && !isNaN($('UserID').val());
+
+        if(!hasCinema){
+          $('#CinemaMsgContainer').html('<p style="color:red">Please choose a cinema!</p>');
+        } else {
+          $('#CinemaMsgContainer').empty();
+        }
+
+        if(!hasMovie){
+          $('#MovieMsgContainer').html('<p style="color:red">Please choose a movie!</p>');
+        }else{
+          $('#MovieMsgContainer').empty();
+        }
+
+        if(!hasTimeslot){
+          $('#TimeslotMsgContainer').html('<p style="color:red">Please choose a timeslot!</p>')
+        } else {
+          $('#TimeslotMsgContainer').empty();
+        }
+
+        if(hasUserID && !hasValidUserID){
+          $('#UserIDMsgContainer').html('Please enter a valid user ID!');
+        } else if(!hasUserID){
+          $('#UserIDMsgContainer').html('Please enter a user ID!');
+        } else {
+          $('#UserIDMsgContainer').empty();
+        }
+
+        if(hasCinema&&hasMovie&&hasTimeslot&&hasUserID&&hasValidUserID&&timeSlotMap!=null){
+          $.ajax({
+            url:'bookResult.php',
+            type: 'post',
+            data: {
+                    'cinemaName': $('#Cinema').val(),
+                    'movieTitle': $('#Movie').val(),
+                    'userID': $('#UserName').val(),
+                    'startTime': timeSlotMap[0],
+                    'endTime': timeSlotMap[1],
+                    'hallID': timeSlotMap[2]
+                  },
+          });
+        }
+      }
+
+
       var timeSlotMap = [];
       function fetchTimeslots(cinemaName, movieTitle){
         if(cinemaName != null && cinemaName != "" &&
@@ -70,6 +123,8 @@
             }
           });           
         }
+              $('#Timeslot').empty();
+              $('#Timeslot').html('<option value=\""\"">Select Timeslot</option>');        
       }
 
       function fetchMovies(cinemaName) {
@@ -90,6 +145,9 @@
               $('#MovieMsgContainer').html('<p>Error when fetching cinema ' + cinemaName + ' movie data.</p>');
             }
           });          
+        } else {
+              $('#Movie').empty();
+              $('#Movie').html('<option value=\""\"">Select Movie</option>');          
         }
         return true;
       }
@@ -120,6 +178,7 @@
         $( "#Cinema" ).change(function() {
           var selectedCinema = $('#Cinema').val();
           fetchMovies(selectedCinema);
+          fetchTimeslots(null,null);
         });
 
         $("#Movie").change(function(){
