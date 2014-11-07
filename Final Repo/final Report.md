@@ -17,7 +17,9 @@ The back ends, which is hidden from users' aspects, processes issued command pas
 ***
 ###### User Interface
 In order to construct an effective user interface for our web applications, we have applied a right mix of a variety of technologies including HTML, CSS, Javascript and Ajax. We are aimed to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
-
+	<br>
+	<img src="homePage.png"  style="width: 800px;"/>
+	<br>
 
 
 ###### Web Server
@@ -39,9 +41,9 @@ Oracle SQL is used as database in our web application.
 - **Display Movie list**
 
 	Users are able to view all the movies by simply click the All Movie button in the navi bar, the page will display the whole list of movies:
-	<br><br><br>
+	<br>
 	<img src="bMovie.png"  style="width: 800px;"/>
-	<br><br>
+	<br>
 
 		SELECT DISTINCT name FROM MOVIE;
 
@@ -53,7 +55,7 @@ Oracle SQL is used as database in our web application.
 
 	 To facilitate this search,we have implemented the SQL query code as follows:
  
-		SELECT
+		SELECT * FROM MOVIE WHERE TITLE LIKE '%"$_Key"%';
 
 - **Search for Booked Ticket**
 
