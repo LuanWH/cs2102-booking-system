@@ -32,8 +32,6 @@ Oracle SQL is used as database in our web application.
 
 #####Browsing
 
-- **Browsing Cinema**
-
 - **Display Movie list**
 
 	Users are able to view all the movies by simply click the All Movie button in the navi bar, the page will display the whole list of movies:
@@ -48,10 +46,6 @@ Oracle SQL is used as database in our web application.
 
 ---
 - **Search for Movie**
-
-	 To facilitate this search,we have implemented the SQL query code as follows:
- 
-		SELECT
 
 - **Search for Booked Ticket**
 
@@ -79,8 +73,9 @@ Oracle SQL is used as database in our web application.
 	<img src="sT3.png"  style="width: 800px;"/>
 	<br><br>
 
+	To facilitate this search,we have implemented the SQL query code as follows:
 		
-	 To facilitate this search,we have implemented the SQL query code as follows
+		
 		
 		SELECT
 		T.SUBSCRIBERID,S.USERNAME,
