@@ -2,21 +2,23 @@
 
 ####Objectives
 ---
-In this project, we aim to design a online movie tickets booking application to facilitate convienient searching and booking for users.
+In this project, we aim to design a online movie tickets booking application to facilitate convenient searching and booking for users.
 User will be allowed to search catalogue of movie based on the **movie title**,**movies attributes**(such as actors, director and movie descriptions),**time slots**,**cinema name**,**cinema location**, and **ticket price range**. In addition,after logging in, users are able to book movie tickets, and modify or cancel their booking afterwards. 
 <br><br><br>
 
 
 ####Implementation
 ---
-The strucure of our web application can be catergrized into two major part including front end components and back end components. 
+The structure of our web application can be categorised into two major part including front end components and back end components. 
 The frond ends, basically user interface, is responsible for directly interacting with users including taking in issued commands and displaying feedback results.
 The back ends, which is hidden from users' aspects, processes issued command passed by UI and returns feedback.
 
 #####Component and Technologies Used
 ***
 ###### User Interface
-In order to constrcut an effeictive uer interface for our web applications, we have applied a right mix of a variaty of technologies including HTML, CSS, Javascript and Ajax. We are aimed to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
+In order to construct an effective user interface for our web applications, we have applied a right mix of a variety of technologies including HTML, CSS, Javascript and Ajax. We are aimed to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
+
+
 
 ###### Web Server
 We use PHP as server page language,
@@ -27,7 +29,7 @@ Oracle SQL is used as database in our web application.
 #####Database Schema
 
 
-#####Functionalites & SQL implementation
+#####Functionalities & SQL implementation
 ***
 
 #####Browsing
@@ -106,6 +108,63 @@ Oracle SQL is used as database in our web application.
 
 - **Book Ticket**
 
+	User can book ticket with us
+	
+	<br><br><br>
+	<img src="book.png"  style="width: 600px;"/>
+	<br><br>
+	
+	_Use Case Flow:_
+	
+	- ID Check
+	
+	<img src="btIDcheck.png"  style="width: 600px;"/>
+	<br>
+	
+	<img src="btIDcheck2.png"  style="width: 600px;"/>
+		
+		
+		SELECT COUNT(*) AS NUM FROM SUBSCRIBER WHERE SUBSCRIBERID =  "$cName";
+		
+	<br><br>
+
+	- Fetch Cinema List
+	
+
+	<img src="btCinema.png"  style="width: 600px;"/>
+	<br>
+	
+		SELECT DISTINCT name FROM cinema;
+	
+	<br><br>
+
+	- Fetch Movie List with specified cinema
+		
+	<img src="btMovieFetch.png"  style="width: 600px;"/>
+	<br>
+	
+		SELECT 
+		DISTINCT MOVIETITLE 
+		FROM OCCUPY, HALL 
+		WHERE OCCUPY.HALLID = HALL.HALLID
+		AND HALL.NAMEOFCINEMA = "$cName";
+		
+	<br><br>
+	- Fetch available timeslots 
+	<img src="btTSFetch.png"  style="width: 600px;"/>
+		
+		INSERT INTO TICKET(SUBSCRIBERID, STARTTIME, ENDTIME, HALLID)
+		VALUES
+		(“$userID”,
+		TO_DATE("$sTime", 'HH24:Mi:SS dd/mm/yyyy’),
+		TO_DATE(“$eTime", 'HH24:Mi:SS dd/mm/yyyy'),
+		"$hallID");
+
+
+	
+	
+	
+<br><br><br>	
 
 #####Screenshots
 ***
