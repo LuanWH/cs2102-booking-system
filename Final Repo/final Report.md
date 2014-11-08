@@ -1,5 +1,15 @@
 
+<br><br><br><br>
+#<center> CS2102 Final Report<br>Online Booking System</center>
+###<center>Movie Tickets Booking System</center> 
+<br><br><br><br><br><br><br><br><br><br>
+###<center>Hu Wenyan (A0119397R)
+###<center>Lu Yuehan (A0119387U)
+###<center>Luan Wenhao (A0119541J)
+</center>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+<center> 07 November 2014</center>
 ####Objectives
 ---
 In this project, we aim to design a online movie tickets booking application to facilitate convenient searching and booking for users.
@@ -10,26 +20,27 @@ User will be allowed to search catalogue of movie based on the **movie title**,*
 ####Implementation
 ---
 The structure of our web application can be categorised into two major part including front end components and back end components. 
-The frond ends, basically user interface, is responsible for directly interacting with users including taking in issued commands and displaying feedback results.
-The back ends, which is hidden from users' aspects, processes issued command passed by UI and returns feedback.
+The frond end, basically user interface, is responsible for directly interacting with users including taking in issued commands and displaying feedback results.
+The back end, which is hidden from users' aspects, processes issued command passed by UI and returns feedback.
 
-#####Component and Technologies Used
+#####Components
 ***
 ###### User Interface
-In order to construct an effective user interface for our web applications, we have applied a right mix of a variety of technologies including HTML, CSS, Javascript and Ajax. We are aimed to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
+In order to construct an effective user interface for our web applications, we have applied a right mix of a variety of web development languages, tools and platforms including *HTML*, *CSS*, *Javascript* and *AJAX*. We aim to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
 	<br>
 	<img src="homePage.png"  style="width: 800px;"/>
 	<br>
 
 
 ###### Web Server
-We use PHP as server page language,
+We use the SoC sub-zone to host our website. The interaction medium between the user interface and the server with our database is PHP language which will query or manipulate the database according to input from the user interface using `POST` method. With the information from users and the database, our PHP scripts will generate HTML codes that will later serve as part of the user interface.
 
 ###### Database 
-Oracle SQL is used as database in our web application.
+We stay with Oracle SQL which is discussed in the module lectures. We try to apply the knowledge we learnt from the course to this website project and it is also good for us to reflect on what we have learnt with this hands-on practice.
 
-#####Database Schema
-
+######Database Schema
+We designed the database schema following our ER Diagram which has been discussed in our progress report.
+<img src="ERDiagram.png" style="width:800px">
 
 #####Functionalities & SQL implementation
 ***
@@ -38,24 +49,31 @@ Oracle SQL is used as database in our web application.
 
 - **Browsing Cinema**
 
+	Users are able to view all the cinemas and the movies showing in the selected cinemas by simply click on any of the three cinema links in the navigation bar, the page will display information about the cinema and its movies:
+	<br>
+	<img src="bCinema.png"  style="width: 800px;"/>
+	<br>
+
+		SELECT * FROM CINEMA;
+
+
 - **Display Movie list**
 
-	Users are able to view all the movies by simply click the All Movie button in the navi bar, the page will display the whole list of movies:
+	Users are able to view all the movies by simply click the All Movie button in the navigation bar, the page will display the whole list of movies:
 	<br>
 	<img src="bMovie.png"  style="width: 800px;"/>
 	<br>
 
-		SELECT DISTINCT name FROM MOVIE;
+		SELECT DISTINCT TITLE FROM MOVIE;
 
 
 #####Searching
 
----
 - **Search for Movie**
 
 	 To facilitate this search,we have implemented the SQL query code as follows:
  
-		SELECT * FROM MOVIE WHERE TITLE LIKE '%"$_Key"%';
+		SELECT * FROM MOVIE WHERE TITLE LIKE '%"$Key"%';
 
 - **Search for Booked Ticket**
 
@@ -67,14 +85,13 @@ Oracle SQL is used as database in our web application.
 	
 	- When user click submit button with input field blank:
 		 
-	
 	<br><br><br>
 	<img src="sT1.png"  style="width: 800px;"/>
 	<br><br>
 	
 	- When the issued User ID has no corresponding entry in ticket database situation, the page will prompt: 
 		
-	<br><br><br>
+	<br>
 	<img src="sT2.png"  style="width: 800px;"/>
 	<br><br>
 		
@@ -119,6 +136,7 @@ Oracle SQL is used as database in our web application.
 	_Use Case Flow:_
 	
 	- ID Check
+		- Note that the User ID validation check is performed immediately when user finishes typing (input field loses focus). It is done by querying the database with the user ID input.
 	
 	<img src="btIDcheck.png"  style="width: 600px;"/>
 	<br>
@@ -141,6 +159,7 @@ Oracle SQL is used as database in our web application.
 	<br><br>
 
 	- Fetch Movie List with specified cinema
+		- Note that whenever the selection in the "Select Cinema" option menu is changed, the Movie List options will change accordingly and immediately by performing an SQL query with AJAX.
 		
 	<img src="btMovieFetch.png"  style="width: 600px;"/>
 	<br>
@@ -153,7 +172,11 @@ Oracle SQL is used as database in our web application.
 		
 	<br><br>
 	- Fetch available timeslots 
+		- Note that whenever the selection in the "Select Movie" option menu is changed, the Timeslot List options will change accordingly and immediately by performing an SQL query with AJAX.
+		
+	<br>
 	<img src="btTSFetch.png"  style="width: 600px;"/>
+	<br>
 		
 		INSERT INTO TICKET(SUBSCRIBERID, STARTTIME, ENDTIME, HALLID)
 		VALUES
@@ -168,7 +191,22 @@ Oracle SQL is used as database in our web application.
 	
 <br><br><br>	
 
-#####Screenshots
+#####Technical Specifications
 ***
+#####JavaScript
 
+- With library **jQuery**.
+- With data format support **JSON**.
+- With client-server communication technique **AJAX**.
+- Sample code:
+	- Using **jQuery** with **AJAX** to fetch timeslots of movies.
+		
+	<img src="fetchTimeslotsHTML.png"  style="width: 600px;"/>
 
+#####PHP
+
+- With library **OCI8**
+- Sample code:
+	- Using **PHP** to query database and echo **JSON** to **AJAX**
+	
+	<img src="fetchTimeslots.png"  style="width: 600px;"/>	 

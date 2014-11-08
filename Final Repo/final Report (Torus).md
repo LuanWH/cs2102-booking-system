@@ -2,32 +2,32 @@
 
 ####Objectives
 ---
-In this project, we aim to design a online movie tickets booking application to facilitate convienient searching and booking for users.
+In this project, we aim to design a online movie tickets booking application to facilitate convenient searching and booking for users.
 User will be allowed to search catalogue of movie based on the **movie title**,**movies attributes**(such as actors, director and movie descriptions),**time slots**,**cinema name**,**cinema location**, and **ticket price range**. In addition,after logging in, users are able to book movie tickets, and modify or cancel their booking afterwards. 
 <br><br><br>
 
 
 ####Implementation
 ---
-The strucure of our web application can be catergrized into two major part including front end components and back end components. 
+The structure of our web application can be categorised into two major part including front end components and back end components. 
 The frond ends, basically user interface, is responsible for directly interacting with users including taking in issued commands and displaying feedback results.
 The back ends, which is hidden from users' aspects, processes issued command passed by UI and returns feedback.
 
-#####Component and Technologies Used
+#####Components
 ***
 ###### User Interface
-In order to constrcut an effeictive uer interface for our web applications, we have applied a right mix of a variaty of technologies including HTML, CSS, Javascript and Ajax. We are aimed to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
+In order to construct an effective user interface for our web applications, we have applied a right mix of a variety of web development languages, tools and platforms including *HTML*, *CSS*, *Javascript* and *AJAX*. We aim to implement a well-thought-out interaction design that reflects the perspective of our users and curtail to their needs.
 
 ###### Web Server
-We use PHP as server page language,
+We use the SoC sub-zone to host our website. The interaction medium between the user interface and the server with our database is PHP language which will query or manipulate the database according to input from the user interface using `POST` method. With the information from users and the database, our PHP scripts will generate HTML codes that will later serve as part of the user interface.
 
 ###### Database 
-Oracle SQL is used as database in our web application.
+We stay with Oracle SQL which is discussed in the module lectures. We try to apply the knowledge we learnt from the course to this website project and it is also good for us to reflect on what we have learnt with this hands-on practice.
 
 #####Database Schema
 
 
-#####Functionalites & SQL implementation
+#####Functionalities & SQL implementation
 ***
 
 #####Browsing
