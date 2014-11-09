@@ -9,8 +9,12 @@
     echo "noInput";
   }
   else{
-      $sql = "SELECT * FROM MOVIE WHERE TITLE LIKE '%".$_POST["TITLE"]."%' AND DIRECTOR LIKE '%".
-      $_POST["DIRECTOR"]."%' AND ACTORS LIKE '%".$_POST["ACTORS"]."%' AND YEAR=".$_POST["YEAR"].";";
+      if($_POST["YEAR"]!=null)
+      $sql = "SELECT * FROM MOVIE WHERE TITLE LIKE '%".$_POST["TITLE"]."%' AND DIRECTOR LIKE '%".$_POST["DIRECTOR"]."%' AND ACTORS LIKE '%".$_POST["ACTORS"]."%' AND YEAR=".$_POST["YEAR"];
+      else {
+      $sql = "SELECT * FROM MOVIE WHERE TITLE LIKE '%".$_POST["TITLE"]."%' AND DIRECTOR LIKE '%".$_POST["DIRECTOR"]."%' AND ACTORS LIKE '%".$_POST["ACTORS"]."%'";
+      } 
+      //echo $sql;
       $stid = oci_parse ($dbh,$sql);
       oci_execute($stid,OCI_DEFAULT);
       $start = 1;

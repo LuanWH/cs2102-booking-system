@@ -132,12 +132,12 @@
         function(){
         	//alert("cliked");
          	$.ajax({
-	          url: 'searchMovie.php',
+	          url: 'multiSearch.php',
 	          type: 'post',
 	          data: {"TITLE": 	$('#movieTitle').val(),
 	      			 "DIRECTOR":$('#director').val(),
 	      			 "ACTORS":  $('#actors').val(),
-	      			 "YEAR": 	$('year').val()},
+	      			 "YEAR": 	$('#year').val()},
 	          dataType:'text',
 	          success: function(data) {
 	          	//alert(data);
@@ -151,17 +151,19 @@
 	          	}else {
 	          			$("#alertInfoContainer").empty();
 	          			$("#alertInfoContainer").append('<h2>Enjoy Movie <strong>Alone</strong></h2>');
-	          		
-		            	var movies = eval(data);  
-		            	for(var i = 0 ; i < moviess.length; i++){
+	          			alert(data);
+		            	var tickets = jQuery.parseJSON(data.toString().trim()); 
+		            	alert("several"); 
+		            	for(var i = 0 ; i < tickets.length; i++){
+
 		            	$("#searchTicketContainer").append('<div class=\"6u 12u(2)\"> <section> <a href=\"#\" class=\"image featured\"><img src=\"images/pic01.jpg\" alt=\"\" /></a> <header><h3>'+
-								movies[i].Title+
+								tickets[i].Title+
 								'</h3> </header> <p> Year: '+
-								movies[i].Year+
-								'<br> Director: '+movies[i].Director+'<br> Actors: '+
-								movies[i].Actors+
-								'<br> Description: '+movies[i].Description+
-								'<br> Producer: '+movies[i].Producer+'<br></p> </section> </div>');
+								tickets[i].Year+
+								'<br> Actors: '+tickets[i].Actors+'<br> Director: '+
+								tickets[i].Director+
+								'<br> Description: '+tickets[i].Description+
+								'<br> Producer: '+tickets[i].Producer+'<br></p> </section> </div>');
 						} 
 	            }        
 	          },
