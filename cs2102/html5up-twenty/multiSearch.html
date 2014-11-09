@@ -146,14 +146,18 @@
 
 	            if(data.toString().trim() == "noInput"||data.toString().trim() == "false"){
 	          		$("#alertInfoContainer").empty();
+	          		if(data.toString().trim() == "noInput"){
+	          			$("#alertInfoContainer").html('<h2>Please Enter Search keyword</h2>');
+	          			return;
+	          		}
 	          		$("#alertInfoContainer").html('<h2>No search result!</h2>');
 	          		return;
 	          	}else {
 	          			$("#alertInfoContainer").empty();
 	          			$("#alertInfoContainer").append('<h2>Enjoy Movie <strong>Alone</strong></h2>');
-	          			alert(data);
+	          			//alert(data);
 		            	var tickets = jQuery.parseJSON(data.toString().trim()); 
-		            	alert("several"); 
+		            	//alert("several"); 
 		            	for(var i = 0 ; i < tickets.length; i++){
 
 		            	$("#searchTicketContainer").append('<div class=\"6u 12u(2)\"> <section> <a href=\"#\" class=\"image featured\"><img src=\"images/pic01.jpg\" alt=\"\" /></a> <header><h3>'+

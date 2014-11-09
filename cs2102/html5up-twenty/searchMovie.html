@@ -119,7 +119,12 @@
 	            $("#searchTicketContainer").empty();
 
 	            if(data.toString().trim() == "noInput"||data.toString().trim() == "false"){
+
 	          		$("#alertInfoContainer").empty();
+	          		if(data.toString().trim() == "noInput"){
+	          			$("#alertInfoContainer").html('<h2>Please Enter Search keyword</h2>');
+	          			return;
+	          		}
 	          		$("#alertInfoContainer").html('<h2>No search result for \''+$('#keyword').val()+'\'</h2>');
 	          		return;
 	          	}else {
