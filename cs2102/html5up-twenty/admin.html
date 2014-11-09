@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Admin Page</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/jquery.scrollgress.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+			<link rel="stylesheet" href="css/style-noscript.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="index">
+	
+		<!-- Header -->
+			<header id="header" class="alt">
+				<h1 id="logo"><a href="#">Start <span> Admin </span></a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="current"><a href="#">Welcome</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Banner -->		
+			<section id="banner">
+				
+				<!--
+					".inner" is set up as an inline-block so it automatically expands
+					in both directions to fit whatever's inside it. This means it won't
+					automatically wrap lines, so be sure to use line breaks where
+					appropriate (<br />).
+				-->
+				<div class="inner">
+					
+					<header>
+						<h2>Admin</h2>
+					</header>
+					<p>This is <strong>Admin</strong>, a responsive
+					<br />
+					movie booking administration website
+					<br />
+					</p>
+					<h2 id = "loginSection"> <strong><center>
+						Password: <input type = "text" id = "password" 
+						style = "text-align:center ; size : 20"
+						></center></strong> 				
+						<br>	    	
+						<a id="submitPassword" class="button fit">
+					    	Submit</a></h2>
+					<footer>
+						<ul class="buttons vertical" id="adminButton">
+							<li><a href="#main" class="button fit scrolly">
+								Start Administrating!</a></li>
+						</ul>
+					</footer>
+				
+				</div>
+				
+			</section>
+		
+		<!-- Main -->
+			<article id="main">
+
+				<header class="special container">
+					<span class="icon fa-bar-chart-o"></span>
+					<h2> <strong><center>
+						User ID: <input type = "text" id = "UserID" 
+						style = "text-align:center ; size : 20"
+						></center></strong> </h2>
+					<br/>
+					    <center>
+					    	<a target="_parent" href="#resultAnchor" id = "searchButton" class="button fit scrolly">
+					    	Search User Ticket</a>
+					    </center>
+				</header>
+					
+				<!-- One -->
+
+					<section class="wrapper style3 container special" id="resultAnchor">
+					
+						<header class="major">
+						<div id = "alertInfoContainer" name="alertInfoContainer">
+							<h2>Start Administrating <strong>Now</strong></h2>
+						</div>
+						</header>
+						
+						<div class="row" id='searchTicketContainer'>
+						</div>
+					</div>
+						<footer class="major">
+							<ul class="buttons">
+								<li><a href="#" class="button">See More</a></li>
+							</ul>
+						</footer>					
+					</section>						
+			</article>				 
+      <script>
+      $(document).ready(function(){
+      	$("#main").hide();
+      	$("#adminButton").hide();
+      	$("#submitPassword").click(
+      		function(){
+      			var pwd = $("#password").val();
+      			if(pwd == "admin"){
+      				$("#loginSection").fadeOut("slow");
+      				$("#adminButton").fadeIn("slow");     				
+      				$("#main").fadeIn("slow");
+      			} else {
+      				alert("Wrong password!");
+      			}
+      		}
+      		);
+       	$("#searchButton").click(
+        function(){
+        	//alert("cliked");
+        	var inputString = $("#UserID").val();
+        	if( inputString== null || inputString == ""){
+            	$("#alertInfoContainer").empty();
+          		$("#alertInfoContainer").append('<h2>Please Enter the User <strong>ID</strong></h2>');
+          		return;
+        	}
+
+         	$.ajax({
+	          url: 'searchTicket.php',
+	          type: 'post',
+	          data: {"UserID": inputString},
+	          dataType:'text',
+	          success: function(data) {
+	          	window.location.href='#alertInfoContainer';
+
+	            $("#searchTicketContainer").empty();
+				if(data.toString().trim() == "false"){
+	          		$("#alertInfoContainer").empty();
+	          		$("#alertInfoContainer").append('<h2>There\'s no </h2>');
+	          		return;
+	          	}else {
+	          			$("#alertInfoContainer").empty();
+	          			$("#alertInfoContainer").append('<h2>Enjoy Movie <strong>Alone</strong></h2>');
+	          		
+		            	var tickets = eval(data);  
+		            	for(var i = 0 ; i < tickets.length; i++){
+		            	$("#searchTicketContainer").append('<div class=\"6u 12u(2)\"> <section> <a href=\"#\" class=\"image featured\"><img src=\"images/pic01.jpg\" alt=\"\" /></a> <header><h3>'+
+								tickets[i].Movie+
+								'</h3> </header> <p> Cinema: '+
+								tickets[i].Cinema+
+								'<br> Location: '+tickets[i].Location+'<br> Hall: '+
+								tickets[i].Hall+
+								'<br> Start Time: '+tickets[i].Start+
+								'<br> End Time: '+tickets[i].End+'<br></p> </section> </div>');
+						} 
+	            }  
+
+	          },
+          		error: function() {
+            	alert("failed");
+          }
+        });
+       }
+      );       
+      });
+      </script>
+					
+					
+				<!-- Two -->
+					<section class="wrapper style1 container special">
+						<div class="row">
+							<div class="4u 12u(2)">
+							
+								<section>
+									<span class="icon featured fa-check"></span>
+									<header>
+										<h3>This is Something</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+								</section>
+							
+							</div>
+							<div class="4u 12u(2)">
+							
+								<section>
+									<span class="icon featured fa-check"></span>
+									<header>
+										<h3>Also Something</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+								</section>
+							
+							</div>
+							<div class="4u 12u(2)">
+							
+								<section>
+									<span class="icon featured fa-check"></span>
+									<header>
+										<h3>Probably Something</h3>
+									</header>
+									<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+								</section>
+							
+							</div>
+						</div>
+					</section>
+					
+				
+		<!-- CTA -->
+			<section id="cta">
+			
+				<header>
+					<h2>Ready to do <strong>something</strong>?</h2>
+				</header>
+				<footer>
+					<ul class="buttons">
+						<li><a href="#" class="button special">Like Us</a></li>
+						<li><a href="#" class="button">LOL I dont like</a></li>
+					</ul>
+				</footer>
+			
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+			
+				<ul class="icons">
+					<li><a target="_top" href="https://github.com/LuanWH/cs2102-booking-system" class="icon circle fa-github"><span class="label">Github</span></a></li>
+				</ul>
+				
+				
+			
+			</footer>
+
+	</body>
+</html>
