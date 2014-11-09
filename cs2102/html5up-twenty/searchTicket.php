@@ -5,7 +5,8 @@
     echo "noInput";
   }
   if($_POST["UserID"] ){
-      $sql = "select T.SUBSCRIBERID,S.USERNAME,O.MOVIETITLE ,Cn.NAME ,Cn.LOCATION,H.HALLID,T.STARTTIME,T.ENDTIME 
+      $sql = "select T.SUBSCRIBERID,S.USERNAME,O.MOVIETITLE ,Cn.NAME ,Cn.LOCATION,H.HALLID,
+              TO_CHAR(T.STARTTIME, 'HH24:Mi:SS dd/mm/yyyy') AS STARTTIME, TO_CHAR(T.ENDTIME, 'HH24:Mi:SS dd/mm/yyyy') AS ENDTIME
              from Ticket T , Occupy O, Subscriber S, Cinema Cn, Hall H
              where 
              (T.STARTTIME = O.STARTTIME AND T.ENDTIME = O.ENDTIME AND T.HALLID = O.HALLID)
