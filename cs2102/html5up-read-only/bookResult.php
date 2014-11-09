@@ -14,5 +14,6 @@
   $stid = oci_parse ($dbh,$sql); 
   oci_execute($stid, OCI_DEFAULT);
   oci_free_statement($stid);
+  oci_commit ($dbh);
   oci_close($dbh);
 ?>           

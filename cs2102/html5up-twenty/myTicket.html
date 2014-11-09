@@ -76,17 +76,17 @@
 						></center></strong> 
 					<br/>
 					    <center>
-					    	<button id = "searchButton" class="button fit">
-					    	Search my Ticket</button>
+					    	<a target="_parent" href="#resultAnchor" id = "searchButton" class="button fit scrolly">
+					    	Search my Ticket</a>
 					    </center>
 				</header>
 					
 				<!-- One -->
 
-					<section class="wrapper style3 container special">
+					<section class="wrapper style3 container special" id="resultAnchor">
 					
 						<header class="major">
-						<div id = "alertInfoContainer">
+						<div id = "alertInfoContainer" name="alertInfoContainer">
 							<h2>Enjoy movie <strong>Alone</strong></h2>
 						</div>
 						</header>
@@ -114,6 +114,7 @@
 	          dataType:'text',
 	          success: function(data) {
 	          	//alert(data);
+	          	window.location.href='#alertInfoContainer';
 
 	            $("#searchTicketContainer").empty();
 
@@ -124,7 +125,7 @@
 	          		return;
 	          	}else if(data.toString().trim() == "false"){
 	          		$("#alertInfoContainer").empty();
-	          		$("#alertInfoContainer").append('<h2>You have no Ticket yet, start <strong><a href=\"booking.html\">Booking Now!</a></strong></h2>');
+	          		$("#alertInfoContainer").append('<h2>You have no Ticket yet, start <strong><a href=\"../html5up-read-only/booking.html\">Booking Now!</a></strong></h2>');
 	          		return;
 	          	}else {
 	          			$("#alertInfoContainer").empty();
@@ -141,7 +142,8 @@
 								'<br> Start Time: '+tickets[i].Start+
 								'<br> End Time: '+tickets[i].End+'<br></p> </section> </div>');
 						} 
-	            }        
+	            }  
+
 	          },
           		error: function() {
             	alert("failed");

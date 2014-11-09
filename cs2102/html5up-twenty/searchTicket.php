@@ -11,6 +11,7 @@
              (T.STARTTIME = O.STARTTIME AND T.ENDTIME = O.ENDTIME AND T.HALLID = O.HALLID)
              AND (H.NAMEOFCINEMA  = Cn.NAME AND H.LOCATIONOFCINEMA = Cn.LOCATION)
              AND T.SUBSCRIBERID = S.SUBSCRIBERID
+             AND H.HALLID = O.HALLID
              AND S.SUBSCRIBERID = ".$_POST["UserID"];
       $stid = oci_parse ($dbh,$sql);
       oci_execute($stid,OCI_DEFAULT);
