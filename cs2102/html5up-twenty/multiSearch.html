@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>iSearch</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/jquery.scrollgress.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+			<link rel="stylesheet" href="css/style-noscript.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="index">
+	
+		<!-- Header -->
+			<header id="header" class="alt">
+				<h1 id="logo"><a href="index.html">Enjoyable <span> iSearch </span></a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="current"><a href="#">Welcome</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Banner -->		
+			<section id="banner">
+				
+				<!--
+					".inner" is set up as an inline-block so it automatically expands
+					in both directions to fit whatever's inside it. This means it won't
+					automatically wrap lines, so be sure to use line breaks where
+					appropriate (<br />).
+				-->
+				<div class="inner">
+					
+					<header>
+						<h2>iSearch</h2>
+					</header>
+					<p>This is <strong>iSearch</strong>, a responsive
+					<br />
+					movie searching website
+					<br />
+					</p>
+					<footer>
+						<ul class="buttons vertical">
+							<li><a href="#main" class="button fit scrolly">
+								Start Search</a></li>
+						</ul>
+					</footer>
+				
+				</div>
+				
+			</section>
+		
+		<!-- Main -->
+			<article id="main">
+
+				<header class="special container">
+					<span class="icon fa-bar-chart-o"></span>
+					<center>
+						<h2>Movie Title: </h2>
+						<input type = "text" id = "movieTitle" 
+						style = "text-align:center ; size : 20"
+						>
+					</center>
+					<br/>
+
+					<center>
+						<h2>Director: </h2>
+						<input type = "text" id = "director" 
+						style = "text-align:center ; size : 20"
+						>
+					</center>
+					<br/>
+					<center>
+						<h2>Actors: </h2>
+						<input type = "text" id = "actors" 
+						style = "text-align:center ; size : 20"
+						>
+					</center>
+					<br/>
+					<center>
+						<h2>Year: </h2>
+						<input type = "text" id = "year" 
+						style = "text-align:center ; size : 20"
+						>
+					</center>
+					<br/>
+					    <center>
+					    	<button id = "searchButton" class="button fit">
+					    	Search Movies</button>
+					    </center>
+				</header>
+					
+				<!-- One -->
+
+					<section class="wrapper style3 container special">
+					
+						<header class="major">
+						<div id = "alertInfoContainer">
+							<h2>Enjoy your movie <strong>ALONE</strong></h2>
+						</div>
+						</header>
+						
+						<div class="row" id='searchTicketContainer'>
+						</div>
+					</div>
+						<footer class="major">
+							<ul class="buttons">
+								<li><a href="#" class="button">See More</a></li>
+							</ul>
+						</footer>					
+					</section>						
+			</article>				 
+      <script>
+      $(document).ready(function(){
+      	//alert("document ready");
+       $("#searchButton").click(
+        function(){
+        	//alert("cliked");
+         	$.ajax({
+	          url: 'searchMovie.php',
+	          type: 'post',
+	          data: {"TITLE": 	$('#movieTitle').val(),
+	      			 "DIRECTOR":$('#director').val(),
+	      			 "ACTORS":  $('#actors').val(),
+	      			 "YEAR": 	$('year').val()},
+	          dataType:'text',
+	          success: function(data) {
+	          	//alert(data);
+
+	            $("#searchTicketContainer").empty();
+
+	            if(data.toString().trim() == "noInput"||data.toString().trim() == "false"){
+	          		$("#alertInfoContainer").empty();
+	          		$("#alertInfoContainer").html('<h2>No search result!</h2>');
+	          		return;
+	          	}else {
+	          			$("#alertInfoContainer").empty();
+	          			$("#alertInfoContainer").append('<h2>Enjoy Movie <strong>Alone</strong></h2>');
+	          		
+		            	var movies = eval(data);  
+		            	for(var i = 0 ; i < moviess.length; i++){
+		            	$("#searchTicketContainer").append('<div class=\"6u 12u(2)\"> <section> <a href=\"#\" class=\"image featured\"><img src=\"images/pic01.jpg\" alt=\"\" /></a> <header><h3>'+
+								movies[i].Title+
+								'</h3> </header> <p> Year: '+
+								movies[i].Year+
+								'<br> Director: '+movies[i].Director+'<br> Actors: '+
+								movies[i].Actors+
+								'<br> Description: '+movies[i].Description+
+								'<br> Producer: '+movies[i].Producer+'<br></p> </section> </div>');
+						} 
+	            }        
+	          },
+          		error: function() {
+            	alert("failed");
+          }
+        });
+       }
+      );       
+      });
+      </script>
+					
+		<!-- Footer -->
+			<footer id="footer">
+			
+				<ul class="icons">
+					<li><a target="_top" href="https://github.com/LuanWH/cs2102-booking-system" class="icon circle fa-github"><span class="label">Github</span></a></li>
+				</ul>
+				
+				
+			
+			</footer>
+
+	</body>
+</html>
